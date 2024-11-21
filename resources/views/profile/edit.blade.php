@@ -1,8 +1,14 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div class="flex items-center justify-between">
+            <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
+                {{ __('Profil') }}
+            </h2>
+
+            <a href="{{ route('dashboard') }}" class="inline-flex items-center px-4 py-2 bg-blue-500 border border-red rounded-md font-semibold text-xs text-Black uppercase tracking-widest hover:bg-blue-600 focus:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 transition ease-in-out duration-150">
+                {{ __('Kembali') }}
+            </a>
+        </div>
     </x-slot>
 
     <div class="py-12">

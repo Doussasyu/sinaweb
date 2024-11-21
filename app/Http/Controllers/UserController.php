@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use App\Datatables\UsersDataTable;
+// use App\Http\Controllers\UsersDataTable;
 
 class UserController extends Controller
 {
@@ -19,11 +21,16 @@ class UserController extends Controller
     }
 
 
-    public function index()
+    // public function index()
+    // {
+    //     $users = User::all();
+    //     //$users = User::paginate(10); // Atur 10 pengguna per halaman
+    //     return view('dashboard', compact('users'));
+    // }
+
+    public function index(UsersDataTable $dataTable)
     {
-        $users = User::all();
-        //$users = User::paginate(10); // Atur 10 pengguna per halaman
-        return view('users.index', compact('users'));
+        return $dataTable->render('users.index');
     }
 
     public function create()
@@ -45,7 +52,7 @@ class UserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User created successfully.');
+        return redirect()->route('dashboard')->with('success', 'Berhasil dibuat!');
     }
 
     public function show(User $user)
@@ -72,12 +79,12 @@ class UserController extends Controller
             'password' => $request->password ? Hash::make($request->password) : $user->password,
         ]);
 
-        return redirect()->route('users.index')->with('success', 'User updated successfully.');
+        return redirect()->route('dashboard')->with('success', 'Berhasil diperbarui.');
     }
 
     public function destroy(User $user)
     {
         $user->delete();
-        return redirect()->route('users.index')->with('success', 'User deleted successfully.');
+        return redirect()->route('dashboard')->with('success', 'Berhasil menghapus.');
     }
 }
